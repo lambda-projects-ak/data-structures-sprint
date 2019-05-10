@@ -16,19 +16,34 @@ class RingBuffer:
             self.current += 1
 
     def get(self):
-        for i in range(len(self.storage) - 1):
-            if not self.storage[i]:
-                self.storage.pop(i)
-
-        return self.storage
-
-
-test = RingBuffer(10)
-test.append(1)
-test.append(2)
-test.append(3)
-
-print(test.get())
+        solution = []
+        for i in range(len(self.storage)):
+            if self.storage[i]:
+                solution.append(self.storage[i])
+        return solution
 
 
-print(len(test.storage) - 1)
+test = RingBuffer(5)
+
+print(len(test.storage))
+
+test.append('a')
+test.append('b')
+test.append('c')
+test.append('d')
+print(len(test.storage))  # 5
+print(test.get())  # ['a', 'b', 'c', 'd']
+
+test.append('e')
+print(len(test.storage))  # 5
+print(test.get())  # ['a', 'b', 'c', 'd', 'e']
+
+test.append('f')
+print(len(test.storage))  # 5
+print(test.get())  # ['f', 'b', 'c', 'd', 'e']
+
+test.append('g')
+test.append('h')
+test.append('i')
+print(len(test.storage))  # 5
+print(test.get())  # ['f', 'g', 'h', 'i', 'e']
